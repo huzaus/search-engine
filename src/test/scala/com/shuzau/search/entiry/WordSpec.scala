@@ -1,6 +1,6 @@
 package com.shuzau.search.entiry
 
-import org.scalacheck.{Gen, Shrink}
+import org.scalacheck.Shrink
 import org.scalatest.EitherValues
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -28,7 +28,7 @@ class WordSpec extends AnyFlatSpec
   }
 
   it should "contain non letter characters" in {
-    forAll(Gen.nonEmptyContainerOf[Vector, Char](Gen.numChar).map(_.mkString)) { string =>
+    forAll(EntityGen.nonLetterCharactersString) { string =>
       Word(string) shouldBe Left(s"Word cannot contain non letter character: $string")
     }
   }
