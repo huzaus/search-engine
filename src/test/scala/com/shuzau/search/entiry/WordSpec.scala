@@ -1,6 +1,5 @@
 package com.shuzau.search.entiry
 
-import org.scalacheck.Shrink
 import org.scalatest.EitherValues
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -10,8 +9,6 @@ class WordSpec extends AnyFlatSpec
   with Matchers
   with ScalaCheckPropertyChecks
   with EitherValues {
-
-  private implicit def noShrink[T]: Shrink[T] = Shrink.shrinkAny
 
   behavior of "Word"
 
