@@ -1,6 +1,8 @@
 package com.shuzau.search.entiry
 
-final case class Words(value: Set[Word])
+final case class Words(value: Set[Word]) {
+  def size: Int = value.size
+}
 
 object Words {
   val separator = " "

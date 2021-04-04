@@ -14,7 +14,7 @@ class WordsSpec extends AnyFlatSpec
   behavior of "Query"
 
   it should "contain at least one word" in {
-    forAll(EntityGen.words) { words =>
+    forAll(EntityGen.wordSet) { words =>
       val queryString = words.map(_.value).mkString(Words.separator)
       Words(queryString).value.value shouldBe words
     }

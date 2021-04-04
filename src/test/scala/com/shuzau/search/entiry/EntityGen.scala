@@ -11,7 +11,7 @@ object EntityGen extends EitherValues {
 
   val word: Gen[Word] = wordString.map(Word(_).value)
 
-  val words: Gen[Set[Word]] = Gen.nonEmptyContainerOf[Set, Word](EntityGen.word)
+  val wordSet: Gen[Set[Word]] = Gen.nonEmptyContainerOf[Set, Word](EntityGen.word)
 
-  val query: Gen[Words] = words.map(Words(_))
+  val words: Gen[Words] = wordSet.map(Words(_))
 }
