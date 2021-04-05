@@ -29,20 +29,24 @@ object Main extends App {
                         storage.put(file.getName, _))
     }
 
-    println("To exit type `:quit`.")
+    println(s"To exit type `${Util.quit}`.")
     println()
 
     var line: String = ""
     do {
       print("search>")
       line = readLine()
-      println(Words(line).fold(s => s, query => Util.format(storage.find(query))))
-      println()
-    } while (line != ":quit")
+      if (line != Util.quit) {
+        println(Words(line).fold(s => s, query => Util.format(storage.find(query))))
+        println()
+      }
+    } while (line != Util.quit)
   }
 }
 
 object Util {
+  val quit = ":quit"
+
   def files(dir: String): List[File] = {
     val d = new File(dir)
     if (d.exists && d.isDirectory) {
@@ -57,7 +61,7 @@ object Util {
   def format(result: QueryResult): String = {
     result.value
           .toVector
-          .sortBy { case (_, result) => - result.score.found }
+          .sortBy { case (_, result) => -result.score.found }
           .take(10)
           .map { case (name, result) => s"$name: ${result.found}/${result.total}" }
           .mkString(System.lineSeparator())
