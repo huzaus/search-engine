@@ -1,6 +1,5 @@
 package com.shuzau.search.entiry
 
-import org.scalacheck.Gen
 import org.scalatest.EitherValues
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -22,13 +21,13 @@ class WordsSpec extends AnyFlatSpec
 
   it should "not be empty" in {
     forAll(Table("string", "", "  ")) { string =>
-      Words(string) shouldBe Left("There are no valid words to search")
+      Words(string) shouldBe Left(s"There are no valid words: $string")
     }
   }
 
   it should "contain only valid word" in {
     forAll(EntityGen.nonLetterCharactersString) { string =>
-      Words(string) shouldBe Left("There are no valid words to search")
+      Words(string) shouldBe Left(s"There are no valid words: $string")
     }
   }
 
